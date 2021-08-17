@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mybatis.mybatisdemo.mapper.TestMapper">
+
+    <!--<cache eviction="LRU" flushInterval="100000" readOnly="true" size="1024"/>-->
+
+    <resultMap id="OneToOne" type="com.example.mybatis.mybatisdemo.model.Test">
+        <id column="nodeId" property="nodeId"></id>
+        <result column="lon" property="lon"></result>
+        <result column="lat" property="lat"></result>
+        <association property="testName" column="nodeId" select="com.example.mybatis.mybatisdemo.mapper.TestMapper.queryNodeName"></association>
+    </resultMap>
+
+    <select id="queryNode"  resultMap="OneToOne">
+        select nodeId,lon,lat from test
+    </select>
+
+    <select id="queryNodeName" parameterType="Integer" resultType="com.example.mybatis.mybatisdemo.model.TestName">
+        select * from test_name where nodeId = #{nodeId}
+    </select>
+
+    <!--<resultMap id="OneToOneLh" type="com.example.mybatis.mybatisdemo.model.Test">
+        <id column="nodeId" property="nodeId"></id>
+        <result column="lon" property="lon"></result>
+        <result column="lat" property="lat"></result>
+        <association property="testName" javaType="com.example.mybatis.mybatisdemo.model.TestName">
+            <id property="nodeId" column="nodeId"></id>
+            <result property="name" column="name"></result>
+        </association>
+    </resultMap>
+
+    <select id="query" resultMap="OneToOneLh">
+        select a.nodeId,a.lon,a.lat,b.nodeId,b.name from test a,test_name b where a.nodeId = b.nodeId
+    </select>-->
+
+
+    <!--<resultMap id="OneToMore" type="com.example.mybatis.mybatisdemo.model.Node">
+        <id column="nodeId" property="nodeId"></id>
+        <result column="lon" property="lon"></result>
+        <result column="lat" property="lat"></result>
+        <collection property="testNameList" column="nodeId" select="com.example.mybatis.mybatisdemo.mapper.TestMapper.queryNodeNameList"></collection>
+    </resultMap>-->
+
+    <!--<select id="queryNodes" resultMap="OneToMore">
+        select nodeId,lon,lat from test
+    </select>
+
+    <select id="queryNodeNameList" parameterType="Integer" resultType="com.example.mybatis.mybatisdemo.model.TestName">
+        select * from test_name where nodeId = #{nodeId}
+    </select>-->
+
+   <!-- <resultMap id="OneToMoreLH" type="com.example.mybatis.mybatisdemo.model.Node">
+        <id column="nodeId" property="nodeId"></id>
+        <result column="lon" property="lon"></result>
+        <result column="lat" property="lat"></result>
+        <collection property="testNameList" ofType="com.example.mybatis.mybatisdemo.model.TestName">
+            <result property="nodeId" column="id"></result>
+            <result property="name" column="name"></result>
+        </collection>
+    </resultMap>
+
+    <select id="queryList" resultMap="OneToMoreLH">
+        select a.nodeId,a.lon,a.lat,b.nodeId id,b.name from test a,test_name b where a.nodeId = b.nodeId
+    </select>-->
+
+
+
+</mapper>

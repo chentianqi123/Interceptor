@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="true" />
+        <setting name="jdbcTypeForNull" value="NULL" />
+        <setting name="lazyLoadingEnabled" value="true" />
+        <setting name="aggressiveLazyLoading" value="false" />
+        <setting name="useGeneratedKeys" value="false" />
+        <setting name="defaultExecutorType" value="SIMPLE" />
+        <setting name="defaultStatementTimeout" value="10" />
+        <!--<setting name="useActualParamName" value="false" />-->
+        <!-- <setting name="logImpl" value="STDOUT_LOGGING" />   --><!-- 加sql日志输出 排查问题用这个不是很方便 -->
+    </settings>
+
+    <plugins>
+        <plugin interceptor="com.example.mybatis.mybatisdemo.util.MyPageHelper"></plugin>
+    </plugins>
+
+    <mappers>
+        <mapper resource="mapper/TestMapper.xml" />
+    </mappers>
+    
+
+</configuration>
